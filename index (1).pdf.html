@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OOP Concept</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <style type="text/css">
+      body {
+        font-family: "Mitr", sans-serif;
+
+        margin: 0; /* ยกเลิกการเว้นระยะขอบของ body */
+        padding: 15px; /* ยกเลิกการเว้นระยะภายในของ body */
+      }
+      .flexbox {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        box-sizing: border-box;
+        margin: 10px;
+      }
+
+      .item {
+        box-sizing: border-box;
+        width: 33.33%;
+        margin-bottom: 20px;
+        padding: 0px 10px;
+      }
+
+      .content {
+        color: #242424;
+        background-color: #c4d7ff;
+        font-weight: 600;
+        text-align: left;
+        box-sizing: border-box;
+        height: 100%;
+        padding: 0px 10px;
+        overflow-x: auto;
+        border-radius: 10px;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        background-color: #f5f5f5;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: monospace;
+        font-size: 0.75em;
+      }
+
+      code {
+        font-family: "Courier New", Courier, monospace;
+        text-align: left;
+      }
+      h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>OOP Concept แนวคิดของการเขียนโปรแกรมเชิงวัตถุ</h1>
+    <h3>I. เขียนโปรแกรมในภาษา Java, C++, Python เปรียบเทียบผลรัน</h3>
+    <div class="flexbox">
+      <div class="item">
+        <div class="content">
+          <h2>Java</h2>
+          <pre><code>class Animal {
+    public Animal() {
+        System.out.println("Create animal");       
+    }
+    public void sound() {
+        System.out.println("Animal makes a sound");       
+    }
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Delete animal");
+    }
+}
+class Dog extends Animal {
+    public Dog() {
+        System.out.println("Dog");
+    }
+    @Override
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Delete dog");
+    }
+}
+class Cat extends Animal {
+    public Cat() {
+        System.out.println("Cat");
+    }
+    @Override
+    public void sound() {
+        System.out.println("Cat meows");
+    }
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Delete cat");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Animal a = new Animal();
+            a.sound();
+            Dog d = new Dog();
+            d.sound();
+            Cat c = new Cat();
+            c.sound();
+            a = null;
+            d = null;
+            c = null;
+    }
+}</code></pre>
+        </div>
+      </div>
+      <div class="item">
+        <div class="content">
+          <h2>C++</h2>
+          <pre><code>class Animal {
+    public:
+        Animal() {
+            std::cout << "Create animal" << std::endl;
+        }
+        virtual void sound() {
+            std::cout << "Animal makes a sound" << std::endl;
+        }
+        virtual ~Animal() {
+            std::cout << "Delete animal" << std::endl;
+        }
+    };
+class Dog : public Animal {
+    public:
+        Dog() {
+            std::cout << "Dog" << std::endl;
+        }
+        void sound() override {
+            std::cout << "Dog barks" << std::endl;
+        }
+        ~Dog() {
+            std::cout << "Delete dog" << std::endl;
+        }
+    };
+class Cat : public Animal {
+    public:
+        Cat() {
+            std::cout << "Cat" << std::endl;
+            }
+        void sound() override {
+            std::cout << "Cat meows" << std::endl;
+        }
+        ~Cat() {
+            std::cout << "Delete cat" << std::endl;
+        }
+    };
+int main() {
+    Animal* a = new Animal();
+    a->sound();
+    Dog* d = new Dog();
+    d->sound();
+    Cat* c = new Cat();
+    c->sound();
+    delete a;
+    delete d;
+    delete c;
+    return 0;
+}</code></pre>
+        </div>
+      </div>
+      <div class="item">
+        <div class="content">
+          <h2>Python</h2>
+          <pre><code>class Animal:
+    def __init__(self):
+        print("Create animal")
+    def sound(self):
+        print("Animal makes a sound")
+    def __del__(self):
+        print("Delete animal")
+        
+class Dog(Animal):
+    def __init__(self):
+        super().__init__()
+            print("Dog")
+        def sound(self):
+            print("Dog barks")
+        def __del__(self):
+            print("Delete dog")
+        
+class Cat(Animal):
+            def __init__(self):
+                super().__init__()
+                print("Cat")
+            def sound(self):
+                print("Cat meows")
+            def __del__(self):
+                print("Delete cat")
+        a = Animal()
+        a.sound()
+        d = Dog()
+        d.sound()
+        c = Cat()
+        c.sound()
+        del a
+        del d
+        del c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </code></pre>
+        </div>
+      </div>
+      <div class="item">
+        <div class="content">
+          <h2>Output</h2>
+          <pre><code>Create animal
+Animal makes a sound
+Create animal
+Dog
+Dog barks
+Create animal
+Cat
+Cat meows
+Delete cat
+Delete dog
+Delete animal
+                
+        </code></pre>
+        </div>
+      </div>
+      <div class="item">
+        <div class="content">
+          <h2>Output</h2>
+          <pre><code>Create animal
+Animal makes a sound
+Create animal
+Dog
+Dog barks
+Create animal
+Cat
+Cat meows
+Delete animal
+Delete dog
+Delete animal
+Delete cat
+Delete animal</code></pre>
+        </div>
+      </div>
+      <div class="item">
+        <div class="content">
+          <h2>Output</h2>
+          <pre><code>Create animal
+Animal makes a sound
+Create animal
+Dog
+Dog barks
+Create animal
+Cat
+Cat meows
+Delete animal
+Delete dog
+Delete cat
+        
+        </code></pre>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3>
+        II. ทำความเข้าใจส่วนประกอบของโค้ดเปรียบเทียบกับ concept ของ OOP ต่อไปนี้
+        โดยยกตัวอย่างส่วนประกอบของโค้ดประกอบการอธิบาย
+      </h3>
+      <h3>1. Class (คลาส)</h3>
+      <p>
+       คำอธิบาย: คลาสเป็นแบบแผนหรือพิมพ์เขียวที่กำหนดคุณสมบัติ (Attributes)
+        และพฤติกรรม (Methods) ของวัตถุ (Objects) ที่สร้างขึ้นจากคลาสนั้น
+      </p>
+      <d class="flexbox">
+        <div class="item">
+          <div class="content">
+            <h3>Java</h3>
+            <pre><code>class Animal {
+    void sound() { //Method
+        System.out.println("Animal makes a sound");
+        }
+}
+    
+    </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>C++</h3>
+            <pre><code>class Animal {
+    public:
+        void sound() { //Method
+            std::cout << "Animal makes a sound" << std::endl;
+        }
+};
+                
+</code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>Python</h3>
+            <pre><code>class Animal:
+    def sound(self): #Method
+        print("Animal makes a sound")
+            
+    
+    
+    
+    </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      
+      <h3>2. Object, Instance (ออบเจ็กต์, อินสแตนซ์)</h3>
+      <p>
+        คำอธิบาย: ออบเจ็กต์คือการสร้างอิงจากคลาส ซึ่งมีคุณสมบัติและพฤติกรรมที่สามารถทำงานได้ โดยออบเจ็กต์แต่ละตัวสามารถมีค่าที่แตกต่างกันในคุณสมบัติของมัน
+      </p>
+      <d class="flexbox">
+        <div class="item">
+          <div class="content">
+            <h3>Java</h3>
+            <pre><code>Animal a = new Animal();  
+// สร้างออบเจ็กต์ a จากคลาส Animal
+a.sound(); 
+// เรียกใช้เมธอด
+                
+    </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>C++</h3>
+            <pre><code>Animal* a = new Animal();                
+// สร้างออบเจ็กต์ a จากคลาส Animal
+a.sound();      
+// เรียกใช้เมธอด
+                
+                
+</code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>Python</h3>
+            <pre><code>a = Animal("Elephant")
+# สร้างออบเจ็กต์ a จากคลาส Animal
+a.sound()             
+# เรียกใช้เมธอด
+
+    </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      
+      <h3>3. Subclass, Derived Class (คลาสย่อย, คลาสที่สืบทอด)</h3>
+      <p>
+        คำอธิบาย: คลาสย่อย (หรือคลาสลูก) เป็นคลาสที่สืบทอดคุณสมบัติและพฤติกรรมจากคลาสแม่ (Superclass) และสามารถปรับแต่งหรือขยายพฤติกรรมของตนเองได้
+      </p>
+      <d class="flexbox">
+        <div class="item">
+          <div class="content">
+            <h3>Java</h3>
+            <pre><code>class Dog extends Animal {  
+//Dogเป็นคลาสย่อยที่สืบทอดจากAnimal
+void sound() {    // เขียนทับเมธอด sound()
+    System.out.println("Dog barks");
+    }
+}
+                
+    
+    </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>C++</h3>
+            <pre><code>class Dog : public Animal { //DogสืบทอดจากAnimal
+    public:
+        void sound() override {   // เขียนทับเมธอด sound()
+            std::cout << "Dog barks" << std::endl;
+        }
+    };
+                
+</code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>Python</h3>
+            <pre><code>class Dog(Animal):  # Dog สืบทอดจาก Animal
+def sound(self):  # เขียนทับเมธอด sound()
+    print("Dog barks")
+            
+
+    
+
+
+    </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      
+      <h3>4. Message (ข้อความ)</h3>
+      <p>
+        คำอธิบาย: ข้อความใน OOP หมายถึงการเรียกใช้เมธอดของออบเจ็กต์ ซึ่งอาจทำให้เกิดการเปลี่ยนแปลงในคุณสมบัติหรือการทำงานของออบเจ็กต์
+
+      </p>
+      <d class="flexbox">
+        <div class="item">
+          <div class="content">
+            <h3>Java</h3>
+            <pre><code>a.sound(); 
+ // ส่งข้อความไปที่ออบเจ็กต์ a เพื่อเรียกใช้เมธอด sound()
+
+                
+    </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>C++</h3>
+            <pre><code>a.sound(); 
+// ส่งข้อความไปที่ออบเจ็กต์ a เพื่อเรียกใช้เมธอด sound()
+
+                
+                
+</code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>Python</h3>
+            <pre><code>a.sound() 
+# ส่งข้อความไปที่ออบเจ็กต์ a เพื่อเรียกใช้เมธอด sound()
+
+
+    </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      
+      <h3>5. Inheritance (การสืบทอด)</h3>
+      <p>
+        คำอธิบาย: การสืบทอดเป็นแนวคิดที่ช่วยให้สามารถสร้างคลาสใหม่จากคลาสที่มีอยู่แล้ว โดยคลาสใหม่จะสืบทอดคุณสมบัติและพฤติกรรมจากคลาสเก่า ทำให้สามารถใช้โค้ดซ้ำได้
+      </p>
+      <d class="flexbox">
+        <div class="item">
+          <div class="content">
+            <h3>Java</h3>
+            <pre><code>class Cat extends Animal { //CatสืบทอดจากAnimal
+    void sound() { // เขียนทับเมธอด sound()
+        System.out.println("Cat meows");
+    }
+}
+            
+      
+
+    </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>C++</h3>
+            <pre><code>class Cat : public Animal { //CatสืบทอดจากAnimal
+    public:
+        void sound() override { 
+            //เขียนทับเมธอดsound()
+            std::cout << "Cat meows" << std::endl;
+        }
+};
+            </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>Python</h3>
+            <pre><code>class Cat(Animal):  # Cat สืบทอดจาก Animal
+def sound(self):  # เขียนทับเมธอด sound()
+    print("Cat meows")
+            
+
+
+
+
+    </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      
+      <h3>6. Polymorphism (พอลิเมอร์ฟิซึม)</h3>
+      <p>
+        คำอธิบาย: พอลิเมอร์ฟิซึมคือความสามารถของ OOP ที่อนุญาตให้ใช้เมธอดเดียวกันในหลาย ๆ รูปแบบ โดยอาจขึ้นอยู่กับประเภทของออบเจ็กต์ที่เรียกใช้ ซึ่งช่วยให้โปรแกรมมีความยืดหยุ่นมากขึ้น
+      </p>
+      <d class="flexbox">
+        <div class="item">
+          <div class="content">
+            <h3>Java</h3>
+            <pre><code>Animal myDog = new Dog();  // สร้างออบเจ็กต์ Dog แต่เก็บไว้ในตัวแปรชนิด Animal
+Animal myCat = new Cat();  // สร้างออบเจ็กต์ Cat แต่เก็บไว้ในตัวแปรชนิด Animal
+myDog.sound();  // Dog barks
+myCat.sound();  // Cat meows
+                
+                
+    </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>C++</h3>
+            <pre><code>Animal* myDog = new Dog();  // สร้างออบเจ็กต์ Dog
+Animal* myCat = new Cat();  // สร้างออบเจ็กต์ Cat
+myDog->sound();  // Dog barks
+myCat->sound();  // Cat meows
+delete myDog;    // คืนหน่วยความจำ
+delete myCat;    // คืนหน่วยความจำ
+                
+                
+                
+</code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>Python</h3>
+            <pre><code>my_dog = Dog()  # สร้างออบเจ็กต์ Dog
+my_cat = Cat()  # สร้างออบเจ็กต์ Cat
+my_dog.sound()  # Dog barks
+my_cat.sound()   # Cat meows
+                
+
+
+
+    </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      
+      <h3>III.  abstract class คืออะไร ในตัวอย่างข้อ I ที่ให้ class ใดคือ abstract class และมีหลักการสร้างอย่างไร</h3>
+      <p>
+        คำอธิบาย: คลาสนามธรรม (Abstract Class) คือคลาสที่ไม่สามารถสร้างออบเจ็กต์ได้โดยตรง และมักจะถูกใช้เป็นแม่แบบสำหรับคลาสย่อย (Subclass) เพื่อกำหนดรูปแบบ (Interface) หรือพฤติกรรมที่จำเป็นต้องมีในคลาสที่สืบทอด โดยคลาสนามธรรมสามารถมีเมธอดที่เป็นนามธรรม (Abstract Method) ซึ่งเป็นเมธอดที่ไม่มีการนิยาม (Implementation) ในคลาสนามธรรม แต่ต้องถูกเขียนทับ (Override) ในคลาสย่อยที่สืบทอดจากคลาสนามธรรมนี้
+      </p>
+      <h3>การสร้าง Abstract Class:</h3>
+      <ul type="o">
+        <li>ใน Java ใช้คำว่า abstract ในการประกาศคลาสและเมธอด</li>
+        <li>ใน C++ ใช้ virtual และ = 0 เพื่อกำหนดเมธอดที่เป็นนามธรรม</li>
+        <li>ใน Python ใช้โมดูล abc เพื่อกำหนดคลาสนามธรรม</li>
+      </ul>
+      <p>ตัวอย่างจากข้อ I
+        ในตัวอย่างที่ให้มา คลาส Animal สามารถถูกทำให้เป็นคลาสนามธรรมได้ โดยการเปลี่ยนแปลงการประกาศเป็นคลาสนามธรรม และสร้างเมธอด sound() เป็นนามธรรม</p>
+      <d class="flexbox">
+        <div class="item">
+          <div class="content">
+            <h3>Java</h3>
+            <pre><code>abstract class Animal { // กำหนดให้ Animal เป็น abstract class
+    abstract void sound(); // เมธอดที่ไม่มีการนิยาม
+}
+class Dog extends Animal {
+     sound() { // เขียนทับเมธอด sound()
+        System.out.println("Dog barks");
+    }
+}
+class Cat extends Animal {
+    void sound() { // เขียนทับเมธอด sound()
+        System.out.println("Cat meows");
+    }
+}
+            
+                
+           
+
+
+
+
+    </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>C++</h3>
+            <pre><code>class Animal { // คลาส Animal เป็น base class
+    public:
+        virtual void sound() = 0; // เมธอดที่เป็นนามธรรม
+};
+class Dog : public Animal {
+    public:
+        void sound() override { // เขียนทับเมธอด sound()
+            std::cout << "Dog barks" << std::endl;
+        }
+};
+    class Cat : public Animal {
+        public:
+            void sound() override { // เขียนทับเมธอด sound()
+                std::cout << "Cat meows" << std::endl;
+        }
+};
+    </code></pre>
+          </div>
+        </div>
+      
+        <div class="item">
+          <div class="content">
+            <h3>Python</h3>
+            <pre><code>my_dog = Dog()  # สร้างออบเจ็กต์ Dog
+my_cat = Cat()  # สร้างออบเจ็กต์ Cat
+my_dog.sound()  # Dog barks
+my_cat.sound()
+# Cat meowsfrom abc import ABC, abstractmethod
+
+class Animal(ABC): 
+# กำหนดให้ Animal เป็น abstract class
+    @abstractmethod
+    def sound(self): # เมธอดที่เป็นนามธรรม
+        pass
+
+class Dog(Animal):
+    def sound(self): # เขียนทับเมธอด sound()
+        print("Dog barks")
+
+class Cat(Animal):
+    def sound(self): # เขียนทับเมธอด sound()
+        print("Cat meows")
+
+                
+    </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
